@@ -1,5 +1,5 @@
 package provider
 
 type Provider interface {
-	Download()
+	Connect()
 }

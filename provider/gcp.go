@@ -7,6 +7,17 @@ type Gcp struct {
 	Dir    string
 }
 
-func (p Gcp) Download() {
-	fmt.Println("GCP Download (unimplemented!)")
+func init() {
+	Constructors[GCP] = ProviderSpec{
+		New:         NewGcp,
+		description: "Placeholder for Provider Description",
+	}
+}
+
+func (p Gcp) Connect() {
+	fmt.Println("Google Cloud Platform Provider (unimplemented!)")
+}
+
+func NewGcp() (Provider, error) {
+	return Gcp{}, nil
 }
