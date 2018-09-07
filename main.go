@@ -3,34 +3,23 @@ package main
 import (
 	"fmt"
 	"github.com/dsalazar32/dinghy/provider"
+	"log"
 	"os"
 )
 
-const nginxStaticDir = "/usr/share/nginx/html"
-
 func main() {
-	bucket, ok := os.LookupEnv("BUCKET")
+	// default storage cloud provider to aws s3
+	p, ok := os.LookupEnv("PROVIDER")
 	if !ok {
-		panic("environment variable 'BUCKET' is required.")
+		p = provider.AWS
 	}
-	fmt.Println(bucket)
 
-	pSvc, ok := os.LookupEnv("PROVIDER")
+	storage, ok := provider.Constructors[p]
 	if !ok {
-		pSvc = "aws"
-	}
-	fmt.Println(pSvc)
-
-	sDir, ok := os.LookupEnv("STATIC_DIR")
-	if !ok {
-		sDir = nginxStaticDir
-	}
-	fmt.Println(sDir)
-
-	storage, err := provider.Constructors[pSvc].New()
-	if err != nil {
 		fmt.Println("Error Occurred")
 	}
 
-	storage.Connect()
+	if err := provider.DownloadFrom(storage); err != nil {
+		log.Fatalf("execution failed: %v", err)
+	}
 }

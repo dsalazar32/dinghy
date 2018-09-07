@@ -9,13 +9,14 @@ type Gcp struct {
 
 func init() {
 	Constructors[GCP] = ProviderSpec{
-		New:         NewGcp,
+		new:         NewGcp,
 		description: "Placeholder for Provider Description",
 	}
 }
 
-func (p Gcp) Connect() {
+func (p Gcp) Run() error {
 	fmt.Println("Google Cloud Platform Provider (unimplemented!)")
+	return nil
 }
 
 func NewGcp() (Provider, error) {

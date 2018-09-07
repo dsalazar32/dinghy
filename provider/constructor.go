@@ -1,7 +1,7 @@
 package provider
 
 type ProviderSpec struct {
-	New         func() (Provider, error)
+	new         func() (Provider, error)
 	description string
 }
 
