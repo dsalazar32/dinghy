@@ -1,6 +1,6 @@
 package provider
 
-// const nginxStaticDir = "/usr/share/nginx/html"
+const nginxStaticDir = "/usr/share/nginx/html"
 
 type Provider interface {
 	Run() error
